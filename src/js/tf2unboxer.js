@@ -331,7 +331,7 @@ let addToStatsSaveTimeout = null;
 const emptyImage = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 const wearTable = ["", "FN", "MW", "FT", "WW", "BS"];
 const wearTableNames = ["", 80, 81, 82, 83, 84];
-const gradeTable = ["", "colorcivilian", "colorfreelance", "colormercenary", "colorcommando", "colorassassin", "colorelite"];
+const gradeTable = ["coloruniquegray", "colorcivilian", "colorfreelance", "colormercenary", "colorcommando", "colorassassin", "colorelite"];
 const sheenTable = ["", 128, 129, 130, 131, 132, 133, 134];
 const killstreakerTable = ["", 135, 136, 137, 138, 139, 140, 141];
 // Save object
@@ -1614,74 +1614,129 @@ window.showItemImage = showItemImage;
 window.hideItemImage = hideItemImage;
 
 
-function showItemImage(itemId, event, itemName, itemClass) {
-    console.log(itemId, itemName, itemClass); // Вывод itemId и itemName в консоль
+// Функция для подстройки размера шрифта
+function adjustFontSize(element) {
+    // Получаем контейнер и его размеры
+    const container = element.parentElement;
+    const maxWidth = container.clientWidth - 20; // Учитываем отступы
 
-    // Если контейнер уже виден, скрываем его
-    if (DOM.results.imageContainer.style.display === "block") {
-        hideItemImage();
-        return; // Завершаем выполнение функции
+    // Константы для размеров шрифта
+    const maxFontSize = 32;
+    const minFontSize = 10;
+    const stepSize = 2; // Шаг уменьшения для оптимизации
+
+    // Сброс стиля для корректного измерения
+    element.style.fontSize = maxFontSize + 'px';
+
+    let currentSize = maxFontSize;
+
+    // Бинарный поиск подходящего размера шрифта
+    while (element.scrollWidth > maxWidth && currentSize > minFontSize) {
+        currentSize = Math.max(currentSize - stepSize, minFontSize);
+        element.style.fontSize = currentSize + 'px';
     }
 
-    if (dataItems[itemId]) {
-        const itemImage = dataItems[itemId]?.img; // Опциональная цепочка
-        //console.log(`Item Image: ${itemImage}`); // Логируем значение itemImage
-
-        const imagePath = itemImage ? `./images/item/${itemImage}.png` : ''; // Формируем путь к изображению
-        console.log(`Image Path: ${imagePath}`); // Вывод пути к изображению в консоль
-
-        // Проверяем, что путь не пустой
-        if (imagePath) {
-            DOM.results.PrewlootImg.src = imagePath; // Устанавливаем путь к изображению
-            DOM.results.imageContainer.style.display = "block"; // Показываем контейнер
-
-            // Устанавливаем название предмета
-            const itemNameElement = DOM.results.imageContainer.querySelector('#itemName');
-            itemNameElement.textContent = itemName; // Устанавливаем текст названия предмета
-
-            // Устанавливаем цвет текста в зависимости от класса
-            const colorMap = {
-                "colorunique": "#FFD700",
-                "colorstrange": "#CF6A32",
-                "colorhaunted": "#38F3AB",
-                "colorcivilian": "#B0C3D9",
-                "colorfreelance": "#5E98D9",
-                "colormercenary": "#4B69FF",
-                "colorcommando": "#8847FF",
-                "colorassassin": "#D32CE6",
-                "colorelite": "#EB4B4B",
-                "colorunusual": "#8650AC",
-                "colordecorated": "#FAFAFA"
-            };
-
-            // Убираем лишние символы и получаем имя класса
-            const cleanedClass = itemClass.replace(/class="|"/g, "").trim(); // Удаляем `class="` и `"`
-
-            // Проверяем, есть ли класс в карте цветов
-            if (colorMap[cleanedClass]) {
-                itemNameElement.style.color = colorMap[cleanedClass]; // Устанавливаем цвет текста
-            } else {
-                console.warn(`No color found for class:${cleanedClass}`); // Логируем предупреждение, если класс не найден
-                itemNameElement.style.color = ""; // Если класс не найден, сбрасываем цвет
-            }
-
-            // Получаем размеры контейнера
-            const containerWidth = DOM.results.imageContainer.offsetWidth;
-
-            // Позиционируем контейнер под курсором
-            DOM.results.imageContainer.style.left = `${event.pageX - containerWidth / 2}px`; // Центрируем по X
-            DOM.results.imageContainer.style.top = `${event.pageY - 80}px`; // Смещение по Y (5 пикселей вниз от курсора)
-        } else {
-            console.error('Invalid image path.'); // Логируем ошибку
-            hideItemImage(); // Скрываем изображение, если путь пустой
-        }
-    } else {
-        console.error(`Item ID ${itemId} not found in dataItems.`); // Логируем ошибку, если ID не найден
-        hideItemImage(); // Скрываем изображение, если ID не найден
+    // Финальная подгонка для точности
+    if (element.scrollWidth > maxWidth && currentSize > minFontSize) {
+        currentSize--;
+        element.style.fontSize = currentSize + 'px';
     }
 }
 
+// Улучшенная функция showItemImage
+function showItemImage(itemId, event, itemName, itemClass) {
+    // Проверка на мобильные устройства
+    if (window.innerWidth < 768) {
+        console.log("Mobile device detected. Not showing item image.");
+        return;
+    }
 
+    // Если контейнер уже отображается, скрываем его
+    if (DOM.results.imageContainer.style.display === "block") {
+        hideItemImage();
+        return;
+    }
+
+    // Проверяем наличие данных предмета
+    const itemData = dataItems[itemId];
+    if (!itemData) {
+        console.error(`Item ID ${itemId} not found in dataItems.`);
+        hideItemImage();
+        return;
+    }
+
+    // Формируем путь к изображению
+    const itemImage = itemData?.img;
+    const imagePath = itemImage ? `./images/item/${itemImage}.png` : '';
+
+    if (!imagePath) {
+        console.error('Invalid image path.');
+        hideItemImage();
+        return;
+    }
+
+    // Устанавливаем изображение и показываем контейнер
+    DOM.results.PrewlootImg.src = imagePath;
+    DOM.results.imageContainer.style.display = "block";
+
+    // Обновляем название предмета
+    const itemNameElement = DOM.results.imageContainer.querySelector('#itemName');
+    itemNameElement.textContent = itemName;
+
+    // Цветовая карта для разных классов предметов
+    const colorMap = {
+        "coloruniquegray": "#FFD700",
+        "colorunique": "#FFD700",
+        "colorstrange": "#CF6A32",
+        "colorhaunted": "#38F3AB",
+        "colorcivilian": "#B0C3D9",
+        "colorfreelance": "#5E98D9",
+        "colormercenary": "#4B69FF",
+        "colorcommando": "#8847FF",
+        "colorassassin": "#D32CE6",
+        "colorelite": "#EB4B4B",
+        "colorunusual": "#8650AC",
+        "colordecorated": "#FAFAFA"
+    };
+
+    // Очищаем и применяем цвет класса
+    const cleanedClass = itemClass.replace(/class="|"/g, "").trim();
+    itemNameElement.style.color = colorMap[cleanedClass] || '';
+
+    if (!colorMap[cleanedClass]) {
+        console.warn(`No color found for class: ${cleanedClass}`);
+    }
+
+    // Подстраиваем размер шрифта
+    adjustFontSize(itemNameElement);
+
+    // Позиционируем контейнер
+    const containerWidth = DOM.results.imageContainer.offsetWidth;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    // Рассчитываем позицию с учетом границ экрана
+    let leftPosition = event.pageX - containerWidth / 2;
+    let topPosition = event.pageY - 80;
+
+    // Проверяем и корректируем позицию по горизонтали
+    if (leftPosition < 0) {
+        leftPosition = 0;
+    } else if (leftPosition + containerWidth > viewportWidth) {
+        leftPosition = viewportWidth - containerWidth;
+    }
+
+    // Проверяем и корректируем позицию по вертикали
+    if (topPosition < 0) {
+        topPosition = 0;
+    } else if (topPosition + DOM.results.imageContainer.offsetHeight > viewportHeight) {
+        topPosition = viewportHeight - DOM.results.imageContainer.offsetHeight;
+    }
+
+    // Применяем позицию
+    DOM.results.imageContainer.style.left = `${leftPosition}px`;
+    DOM.results.imageContainer.style.top = `${topPosition}px`;
+}
 
 function hideItemImage() {
     DOM.results.imageContainer.style.display = "none"; // Скрываем контейнер
@@ -1695,6 +1750,9 @@ function escapeHtml(unsafe) {
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
 }
+
+
+
 
 
 

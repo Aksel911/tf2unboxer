@@ -32,11 +32,12 @@ a {
 
 #imageContainer {
     display: none;
-    position: absolute;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border-radius: 10px;
-    /* Основной градиент фона */
     background: linear-gradient(to bottom, #38332D, #221E1A);
-    /* Добавляем глянцевый эффект поверх основного градиента */
     background-image:
             linear-gradient(to bottom,
                     rgba(255, 255, 255, 0.05) 0%,
@@ -47,41 +48,44 @@ a {
     padding: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    width: 420px;
-    height: 500px;
-    overflow: hidden;
+    width: 90%; /* Изменено с фиксированной ширины на процентную */
+    max-width: 420px; /* Максимальная ширина для больших экранов */
+    height: auto; /* Изменено с фиксированной высоты */
+    max-height: 90vh; /* Максимальная высота 90% от высоты viewport */
+    overflow: auto; /* Изменено с hidden на auto для прокрутки при необходимости */
 }
 
 #itemName {
-    margin-bottom: 10px; /* Отступ сверху */
-    color: yellow; /* Цвет текста */
-    text-align: center; /* Выравнивание по центру */
-    font-size: 32px; /* Размер шрифта */
-    overflow: hidden; /* Скрываем текст, который выходит за пределы */
-    text-overflow: ellipsis; /* Добавляем многоточие для длинного текста */
-    white-space: nowrap; /* Запрещаем перенос строки */
+    margin-bottom: 10px;
+    color: #FFD700;
+    text-align: center;
+    font-size: clamp(10px, 5vw, 32px); /* Адаптивный размер шрифта */
+    overflow: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     font-weight: bold;
+    width: 100%;
+    padding: 0 10px; /* Добавлены отступы по бокам */
+    box-sizing: border-box; /* Учитываем padding в общей ширине */
 }
 
-/* Стили для изображения */
 #PrewlootImg {
-    width: 100%; /* Ширина 100% контейнера */
-    height: auto; /* Высота по пропорциям */
-    border-radius: 10px; /* Закругленные углы */
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    max-height: 70vh; /* Ограничиваем высоту изображения */
+    object-fit: contain; /* Сохраняем пропорции изображения */
 }
 
-
-/* Медиа-запрос для мобильных экранов */
-@media (max-width: 600px) {
+/* Стили для мобильных устройств */
+@media (max-width: 900px) {
     #imageContainer {
-        padding: 5px; /* Уменьшаем отступы для мобильных */
-    }
-
-    #PrewlootImg {
-        width: 100%; /* Задаем ширину 100% */
-        max-width: 200px; /* Максимальная ширина для лучшего отображения */
+        display: none;
     }
 }
+
+
+
 
 
 
@@ -672,7 +676,7 @@ a.btn {
 #crategridsearch {
     display: none;
     height: 6%;
-    flex-wrap: none;
+    flex-wrap: nowrap;
     border-bottom: 0.5vh solid #554D4A;
     .crategridsearchicon {
         display: flex;
@@ -2381,6 +2385,19 @@ div.visible {
 }
 
 // Item quality colors
+.coloruniquegray {
+    color: #6b6a65;
+
+    &.bordercolor {
+        border-color: #6b6a65;
+    }
+}
+.coloruniquegray:hover {
+    color: #4d7455; /* Подсветка текста при наведении */
+    cursor: pointer; /* Изменяем курсор на указатель при наведении */
+}
+
+
 .colorunique {
     color: #FFD700;
 
@@ -2388,6 +2405,11 @@ div.visible {
         border-color: #FFD700;
     }
 }
+.colorunique:hover {
+    color: #4d7455; /* Подсветка текста при наведении */
+    cursor: pointer; /* Изменяем курсор на указатель при наведении */
+}
+
 
 .colorstrange {
     color: #CF6A32;
@@ -2400,6 +2422,11 @@ div.visible {
         border-color: #CF6A32;
     }
 }
+.colorstrange:hover {
+    color: #4d7455; /* Подсветка текста при наведении */
+    cursor: pointer; /* Изменяем курсор на указатель при наведении */
+}
+
 
 .colorhaunted {
     color: #38F3AB;
@@ -2412,6 +2439,11 @@ div.visible {
         border-color: #38F3AB;
     }
 }
+.colorhaunted:hover {
+    color: #4d7455; /* Подсветка текста при наведении */
+    cursor: pointer; /* Изменяем курсор на указатель при наведении */
+}
+
 
 .colorcivilian {
     color: #B0C3D9;
@@ -2420,6 +2452,11 @@ div.visible {
         border-color: #B0C3D9;
     }
 }
+.colorcivilian:hover {
+    color: #4d7455; /* Подсветка текста при наведении */
+    cursor: pointer; /* Изменяем курсор на указатель при наведении */
+}
+
 
 .colorfreelance {
     color: #5E98D9;
@@ -2428,6 +2465,11 @@ div.visible {
         border-color: #5E98D9;
     }
 }
+.colorfreelance:hover {
+    color: #4d7455; /* Подсветка текста при наведении */
+    cursor: pointer; /* Изменяем курсор на указатель при наведении */
+}
+
 
 .colormercenary {
     color: #4B69FF;
@@ -2436,6 +2478,11 @@ div.visible {
         border-color: #4B69FF;
     }
 }
+.colormercenary:hover {
+    color: #4d7455; /* Подсветка текста при наведении */
+    cursor: pointer; /* Изменяем курсор на указатель при наведении */
+}
+
 
 .colorcommando {
     color: #8847FF;
@@ -2444,6 +2491,11 @@ div.visible {
         border-color: #8847FF;
     }
 }
+.colorcommando:hover {
+    color: #4d7455; /* Подсветка текста при наведении */
+    cursor: pointer; /* Изменяем курсор на указатель при наведении */
+}
+
 
 .colorassassin {
     color: #D32CE6;
@@ -2452,6 +2504,11 @@ div.visible {
         border-color: #D32CE6;
     }
 }
+.colorassassin:hover {
+    color: #4d7455; /* Подсветка текста при наведении */
+    cursor: pointer; /* Изменяем курсор на указатель при наведении */
+}
+
 
 .colorelite {
     color: #EB4B4B;
@@ -2460,6 +2517,11 @@ div.visible {
         border-color: #EB4B4B;
     }
 }
+.colorelite:hover {
+    color: #4d7455; /* Подсветка текста при наведении */
+    cursor: pointer; /* Изменяем курсор на указатель при наведении */
+}
+
 
 .colorunusual {
     color: #8650AC;
@@ -2468,7 +2530,16 @@ div.visible {
         border-color: #8650AC;
     }
 }
+.colorunusual:hover {
+    color: #4d7455; /* Подсветка текста при наведении */
+    cursor: pointer; /* Изменяем курсор на указатель при наведении */
+}
+
 
 .colordecorated {
     color: #FAFAFA;
+}
+.colordecorated:hover {
+    color: #4d7455; /* Подсветка текста при наведении */
+    cursor: pointer; /* Изменяем курсор на указатель при наведении */
 }
