@@ -23703,192 +23703,230 @@ export let dataItems = {
     2012: { // hw2024 items
         img: "school_nuisance",
         eng: "School Nuisance",
-		rus: "Школьная шпана"
+		rus: "Школьная шпана",
+        schema: 31442
     },
     2013: {
         img: "strikeout",
         eng: "Strikeout",
-		rus: "Страйком по голове"
+		rus: "Страйком по голове",
+        schema: 31443,
     },
     2014: {
         img: "chiromancer's_kit",
         eng: "Chiromancer's Kit",
-		rus: "Комплект хироманта"
+		rus: "Комплект хироманта",
+        schema: 31444,
     },
     2015: {
         img: "sear_seer",
         eng: "Sear Seer",
-		rus: "Провидец пламени"
+		rus: "Провидец пламени",
+        schema: 31445,
     },
     2016: {
         img: "badlands_bandido",
         eng: "Badlands Bandido",
-		rus: "Преступник пустошей"
+		rus: "Преступник пустошей",
+        schema: 31446,
     },
 
     2017: {
         img: "defaced_detonator",
         eng: "Defaced Detonator",
-		rus: "Двуликий детонатор"
+		rus: "Двуликий детонатор",
+        schema: 31447,
     },
     2018: {
         img: "dusk_duster",
         eng: "Dusk Duster",
-		rus: "Полуночный пыльник"
+		rus: "Полуночный пыльник",
+        schema: 31448,
     },
     2019: {
         img: "hellish_overlord",
         eng: "Hellish Overlord",
-		rus: "Адский властелин"
+		rus: "Адский властелин",
+        schema: 31449,
     },
     2020: {
         img: "strigoi_stare",
         eng: "Strigoi Stare",
-		rus: "Взгляд вампира"
+		rus: "Взгляд вампира",
+        schema: 31450,
     },
     2021: {
         img: "contaminated_carryall",
         eng: "Contaminated Carryall",
-		rus: "Радиоактивный ранец"
+		rus: "Радиоактивный ранец",
+        schema: 31451,
     },
     2022: {
         img: "delldozer",
         eng: "Delldozer",
-		rus: "Делльдозер"
+		rus: "Делльдозер",
+        schema: 31452,
     },
     2023: {
         img: "contaminated_carryall",
         eng: "Contaminated Carryall",
-		rus: "Радиоактивный ранец"
+		rus: "Радиоактивный ранец",
+        schema: 31453,
     },
     2024: {
         img: "mannhattan_protect",
         eng: "Mannhattan Protect",
-		rus: "Маннхэттенский протектор"
+		rus: "Маннхэттенский протектор",
+        schema: 31454,
     },
     2025: {
         img: "nuclear_necessity",
         eng: "Nuclear Necessity",
-		rus: "Ядерный специалитет"
+		rus: "Ядерный специалитет",
+        schema: 31455,
     },
     2026: {
         img: "surgeon_general",
         eng: "Surgeon General",
-		rus: "Генеральный хирург"
+		rus: "Генеральный хирург",
+        schema: 31456,
     },
     2027: {
         img: "witch_doctor",
         eng: "Witch Doctor",
-		rus: "Вуду-врачеватель"
+		rus: "Вуду-врачеватель",
+        schema: 31457,
     },
     2028: {
         img: "nightfall_veil",
         eng: "Nightfall Veil",
-		rus: "Сумрачное кимоно"
+		rus: "Сумрачное кимоно",
+        schema: 31458,
     },
     2029: {
         img: "shadow_shroud",
         eng: "Shadow Shroud",
-		rus: "Скрытый сумраком"
+		rus: "Скрытый сумраком",
+        schema: 31459,
     },
     2030: {
         img: "duality_of_mantle",
         eng: "Duality of Mantle",
-		rus: "Маннтия двойственности"
+		rus: "Маннтия двойственности",
+        schema: 31460,
     },
     2031: {
         img: "fleet_commander",
         eng: "Fleet Commander",
-		rus: "Флотский коммандер"
+		rus: "Флотский коммандер",
+        schema: 31461,
     },
     2032: {
         img: "spider_sights",
         eng: "Spider Sights",
-		rus: "Пауч-очки"
+		rus: "Пауч-очки",
+        schema: 31462,
     },
     2033: {
         img: "triboniophorus_gentlemannus",
         eng: "Triboniophorus Gentlemannus",
-		rus: "Трибониофорус Джентльманнус"
+		rus: "Трибониофорус Джентльманнус",
+        schema: 31463,
     },
     2034: { // hw2024 taunts
         img: "peace_out",
         eng: "Taunt: Peace Out",
-		rus: "Насмешка: Земля стекловатой"
+		rus: "Насмешка: Земля стекловатой",
+        schema: 31465,
     },
     2035: {
         img: "crushing_defeat",
         eng: "Taunt: Crushing Defeat",
-		rus: "Насмешка: Сокрушительное поражение"
+		rus: "Насмешка: Сокрушительное поражение",
+        schema: 31466,
     },
     2036: {
         img: "punchline",
         eng: "Taunt: Punchline",
-		rus: "Насмешка: Розыгрыш"
+		rus: "Насмешка: Розыгрыш",
+        schema: 31467,
     },
     2037: {
         img: "commending_clap",
         eng: "Taunt: Commending Clap",
-		rus: "Насмешка: Хвалебные хлопки"
+		rus: "Насмешка: Хвалебные хлопки",
+        schema: 31468,
     },
     2038: { // hw2024 warpaint
         img: "broken_record_war_paint",
         eng: "Broken Record War Paint",
         rus: "Боевая краска \"Битая пластинка\"",
+        schema: 31469,
     },
     2039: {
         img: "necropolish_war_paint",
         eng: "Necropolish War Paint",
         rus: "Боевая краска \"Некрополироль\"",
+        schema: 31470,
     },
     2040: {
         img: "stardust_war_paint",
         eng: "Stardust War Paint",
         rus: "Боевая краска \"Звёздная пыль\"",
+        schema: 31471,
     },
     2041: {
         img: "graphite_gripped_war_paint",
         eng: "Graphite Gripped War Paint",
         rus: "Боевая краска \"Грани графита\"",
+        schema: 31472,
     },
     2042: {
         img: "piranha_mania_war_paint",
         eng: "Piranha Mania War Paint",
         rus: "Боевая краска \"Проба пираньи\"",
+        schema: 31473,
     },
     2043: {
         img: "stealth_specialist_war_paint",
         eng: "Stealth Specialist War Paint",
         rus: "Боевая краска \"Спец по скрытности\"",
+        schema: 31474,
     },
     2044: {
         img: "blackout_war_paint",
         eng: "Blackout War Paint",
         rus: "Боевая краска \"Затемнение\"",
+        schema: 31475,
     },
     2045: {
         img: "brawler's_iron_war_paint",
         eng: "Brawler's Iron War Paint",
         rus: "Боевая краска \"Клеймо вояки\"",
+        schema: 31476,
     },
     2046: {
         img: "gobi_glazed_war_paint",
         eng: "Gobi Glazed War Paint",
         rus: "Боевая краска \"Пустынное покрытие\"",
+        schema: 31477,
     },
     2047: {
         img: "sleek_greek_war_paint",
         eng: "Sleek Greek War Paint",
         rus: "Боевая краска \"Греческая грация\"",
+        schema: 31478,
     },
     2048: {
         img: "team_charged_war_paint",
         eng: "Team Charged War Paint",
         rus: "Боевая краска \"Заряд команды\"",
+        schema: 31479,
     },
     2049: {
         img: "team_detail_war_paint",
         eng: "Team Detail War Paint",
         rus: "Боевая краска \"Командная отделка\"",
+        schema: 31480,
     },
 }

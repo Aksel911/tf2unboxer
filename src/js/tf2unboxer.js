@@ -200,6 +200,7 @@ const DOM = {
         crateGridSearchBtn: document.eId("searchbtn"),
         crateGridSearchDiv: document.eId("crategridsearch"),
         crateWindow: document.eId("cratewindow")
+
     },
     bulkSelect: {
         screen: document.eId("bulkunboxselect"),
@@ -313,7 +314,9 @@ const DOM = {
         bonusItemContainer: document.eId("lootbonusitemcontainer"),
         steamMarketBtn: document.eId("lootsteammarketbtn"),
         bptfBtn: document.eId("lootbptfbtn"),
-        mptfBtn: document.eId("lootmptfbtn")
+        mptfBtn: document.eId("lootmptfbtn"),
+        PrewlootImg: document.getElementById("PrewlootImg"),
+        imageContainer: document.getElementById("imageContainer")
     }
 }
 
@@ -1489,8 +1492,7 @@ for (let el of document.getElementsByClassName("btn")) {
     });
 }
 
-// Previous/next crate buttons
-
+// MENU Previous/next crate buttons
 function jumpToCrate(param, firstLoad = false) {
     switch (param) {
         case "next":
@@ -1533,7 +1535,7 @@ DOM.main.previousCrateBtn.addEventListener("click", () => {
     jumpToCrate("previous");
 });
 
-// Generate loot list
+// Generate loot list (Генерация лута из ящика)
 
 function generateLootList() {
     let html = [];
@@ -1558,8 +1560,13 @@ function generateLootList() {
         if (gradeTable[item.grade] != 0) {
             itemClass = ` class="${gradeTable[item.grade]}"`
         }
-        html.push(`<li${itemClass}>${itemName}</li>`);
+        html.push(`<li${itemClass} ondblclick="showItemImage(${item.id}, event, '${escapeHtml(itemName)}', '${escapeHtml(itemClass)}')" onmouseout="hideItemImage()">${escapeHtml(itemName)}</li>`);
+
+
+
+
     };
+
 
     if (currentCrateObj.unusual === 1) {
         html.push(`<li class="unusualloot">${getString("ui", 74)}</li>`);
@@ -1602,6 +1609,95 @@ function generateLootList() {
         DOM.main.lootNote.innerHTML = "";
     }
 }
+
+window.showItemImage = showItemImage;
+window.hideItemImage = hideItemImage;
+
+
+function showItemImage(itemId, event, itemName, itemClass) {
+    console.log(itemId, itemName, itemClass); // Вывод itemId и itemName в консоль
+
+    // Если контейнер уже виден, скрываем его
+    if (DOM.results.imageContainer.style.display === "block") {
+        hideItemImage();
+        return; // Завершаем выполнение функции
+    }
+
+    if (dataItems[itemId]) {
+        const itemImage = dataItems[itemId]?.img; // Опциональная цепочка
+        //console.log(`Item Image: ${itemImage}`); // Логируем значение itemImage
+
+        const imagePath = itemImage ? `./images/item/${itemImage}.png` : ''; // Формируем путь к изображению
+        console.log(`Image Path: ${imagePath}`); // Вывод пути к изображению в консоль
+
+        // Проверяем, что путь не пустой
+        if (imagePath) {
+            DOM.results.PrewlootImg.src = imagePath; // Устанавливаем путь к изображению
+            DOM.results.imageContainer.style.display = "block"; // Показываем контейнер
+
+            // Устанавливаем название предмета
+            const itemNameElement = DOM.results.imageContainer.querySelector('#itemName');
+            itemNameElement.textContent = itemName; // Устанавливаем текст названия предмета
+
+            // Устанавливаем цвет текста в зависимости от класса
+            const colorMap = {
+                "colorunique": "#FFD700",
+                "colorstrange": "#CF6A32",
+                "colorhaunted": "#38F3AB",
+                "colorcivilian": "#B0C3D9",
+                "colorfreelance": "#5E98D9",
+                "colormercenary": "#4B69FF",
+                "colorcommando": "#8847FF",
+                "colorassassin": "#D32CE6",
+                "colorelite": "#EB4B4B",
+                "colorunusual": "#8650AC",
+                "colordecorated": "#FAFAFA"
+            };
+
+            // Убираем лишние символы и получаем имя класса
+            const cleanedClass = itemClass.replace(/class="|"/g, "").trim(); // Удаляем `class="` и `"`
+
+            // Проверяем, есть ли класс в карте цветов
+            if (colorMap[cleanedClass]) {
+                itemNameElement.style.color = colorMap[cleanedClass]; // Устанавливаем цвет текста
+            } else {
+                console.warn(`No color found for class:${cleanedClass}`); // Логируем предупреждение, если класс не найден
+                itemNameElement.style.color = ""; // Если класс не найден, сбрасываем цвет
+            }
+
+            // Получаем размеры контейнера
+            const containerWidth = DOM.results.imageContainer.offsetWidth;
+
+            // Позиционируем контейнер под курсором
+            DOM.results.imageContainer.style.left = `${event.pageX - containerWidth / 2}px`; // Центрируем по X
+            DOM.results.imageContainer.style.top = `${event.pageY - 80}px`; // Смещение по Y (5 пикселей вниз от курсора)
+        } else {
+            console.error('Invalid image path.'); // Логируем ошибку
+            hideItemImage(); // Скрываем изображение, если путь пустой
+        }
+    } else {
+        console.error(`Item ID ${itemId} not found in dataItems.`); // Логируем ошибку, если ID не найден
+        hideItemImage(); // Скрываем изображение, если ID не найден
+    }
+}
+
+
+
+function hideItemImage() {
+    DOM.results.imageContainer.style.display = "none"; // Скрываем контейнер
+}
+
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+
 
 // Generate effect list
 

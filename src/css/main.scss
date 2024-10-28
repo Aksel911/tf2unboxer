@@ -30,6 +30,64 @@ a {
     text-decoration: none;
 }
 
+#imageContainer {
+    display: none;
+    position: absolute;
+    border-radius: 10px;
+    /* Основной градиент фона */
+    background: linear-gradient(to bottom, #38332D, #221E1A);
+    /* Добавляем глянцевый эффект поверх основного градиента */
+    background-image:
+            linear-gradient(to bottom,
+                    rgba(255, 255, 255, 0.05) 0%,
+                    rgba(255, 255, 255, 0.02) 10%,
+                    transparent 50%
+            ),
+            linear-gradient(to bottom, #38332D, #221E1A);
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 420px;
+    height: 500px;
+    overflow: hidden;
+}
+
+#itemName {
+    margin-bottom: 10px; /* Отступ сверху */
+    color: yellow; /* Цвет текста */
+    text-align: center; /* Выравнивание по центру */
+    font-size: 32px; /* Размер шрифта */
+    overflow: hidden; /* Скрываем текст, который выходит за пределы */
+    text-overflow: ellipsis; /* Добавляем многоточие для длинного текста */
+    white-space: nowrap; /* Запрещаем перенос строки */
+    font-weight: bold;
+}
+
+/* Стили для изображения */
+#PrewlootImg {
+    width: 100%; /* Ширина 100% контейнера */
+    height: auto; /* Высота по пропорциям */
+    border-radius: 10px; /* Закругленные углы */
+}
+
+
+/* Медиа-запрос для мобильных экранов */
+@media (max-width: 600px) {
+    #imageContainer {
+        padding: 5px; /* Уменьшаем отступы для мобильных */
+    }
+
+    #PrewlootImg {
+        width: 100%; /* Задаем ширину 100% */
+        max-width: 200px; /* Максимальная ширина для лучшего отображения */
+    }
+}
+
+
+
+
+
+
 nav {
     height: 5%;
     width: 100%;
