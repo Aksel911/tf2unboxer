@@ -3,10 +3,14 @@ A Team Fortress 2 crate/case simulator.
 
 Available at [https://unboxer.tf](https://unboxer.tf).
 
+## 10.27.2024
+- Added double click on name items preview (in beta now)
+
+
 ## 10.26.2024
 - Added Russian translation
-- Added HW 2024 cases (only in .js, with pics)
-- Only items added from HW 2024 (no pics, just in .js), no taunts, no warpaints
+- Added Halloween 2024 Cosmetics, Warpaints, Taunts and Effects
+
 
 # HOWTO (ENG)
 
