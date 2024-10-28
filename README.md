@@ -3,6 +3,9 @@ A Team Fortress 2 crate/case simulator.
 
 Available at [https://unboxer.tf](https://unboxer.tf).
 
+## 10.28.2024
+- The cursor behavior has been updated to change upon hovering over items in the case, and a green hover effect has been implemented.
+
 ## 10.27.2024
 - Added double click on name items preview (in beta now)
 
